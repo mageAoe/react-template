@@ -1,16 +1,9 @@
 import React, { Suspense } from 'react';
-import { RouterProvider } from 'react-router-dom';
+import { RouterProvider, HashRouter } from 'react-router-dom';
 import Loading from '@/pages/loading';
-import router from './router';
+import Router from './router';
 import './App.css';
-
-const abababababaaaaads = 3;
-const aahhsdjasdfsdfgdfgsdfgsd = 4;
-const dsjkfsdfskdgsdgd = 6;
-// const pp =
-//   Number(
-//     abababababaaaaads + aahhsdjasdfsdfgdfgsdfgsd + dsjkfsdfskdgsdgd
-//   ).toFixed(2) + 'asdadasd';
+import { ConfigProvider } from 'antd';
 
 function App() {
   //   const arr = [1, 2, 3, 4];
@@ -28,8 +21,18 @@ function App() {
 
   return (
     <Suspense fallback={<Loading />}>
-      <RouterProvider router={router}></RouterProvider>
+      <RouterProvider router={Router}></RouterProvider>
     </Suspense>
+    // <HashRouter>
+    //   <ConfigProvider
+    //     theme={{
+    //       token: {
+    //         colorPrimary: '#00b96b'
+    //       }
+    //     }}>
+    //     <Router />
+    //   </ConfigProvider>
+    // </HashRouter>
   );
 }
 

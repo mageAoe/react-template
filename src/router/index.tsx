@@ -1,9 +1,16 @@
-import React, { lazy } from 'react';
-import { createHashRouter, Navigate } from 'react-router-dom';
+import React, { lazy, Suspense } from 'react';
+import {
+  createHashRouter,
+  Navigate,
+  useRoutes,
+  RouterProvider
+} from 'react-router-dom';
 import HomeC from '../pages/home';
+import Detail from '../pages/detail';
+import Loading from '@/pages/loading';
 
 // 引入方法一
-// const Home = lazy(() => import('../pages/home'))
+// const Home = lazy(() => import('../pages/home'));
 
 // 引入方法二
 // const Home = lazy(async () => {
@@ -27,8 +34,32 @@ const Home = lazy(
     })
 );
 
-const Detail = lazy(() => import('../pages/detail'));
+// const Detail = lazy(() => import('../pages/detail'));
 const Record = lazy(() => import('../pages/record'));
+
+// createHashRouter([
+//   {
+//     path: '/',
+//     element: <Navigate replace to='/home' />
+//   },
+//   {
+//     path: '/home',
+//     element: <HomeC />
+//   },
+//   {
+//     path: '/detail',
+//     element: <Detail />
+//   },
+//   {
+//     path: '/record',
+//     element: <Record />
+//   }
+// ]);
+
+// const Router = () => {
+//   const routes = useRoutes(rootRouter);
+//   return routes;
+// };
 
 export default createHashRouter([
   {

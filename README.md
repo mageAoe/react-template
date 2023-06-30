@@ -1,7 +1,10 @@
 - 🚀 使用 Prettier 统一格式化代码，集成 Eslint、Stylelint 代码校验规范（项目规范配置）
 - 🚀 使用 husky、lint-staged、commitlint、commitizen、cz-git 规范提交信息（项目规范配置）
 - 🚀 使用 TypeScript 对 Axios 二次封装 （错误拦截、常用请求封装、全局请求 Loading、取消重复请求…）
-- 🚀 使用 standard-version 生成change-log
+- 🚀 使用 conventional-changelog 生成change-log
+- 🚀 使用 @iconify/react 图标图，拥有15000个图标
+- 🚀 使用 unocss 来写减少css以及class的编写
+- 🚀 使用 redux 做状态管理，集成 immer、react-redux、redux-persist 开发
 
 ESLint+Prettier+Stylelint+EditorConfig 约束和统一前端代码规范
 
@@ -15,10 +18,16 @@ Husky + Lint-staged + Commitlint + Commitizen + cz-git 配置 Git 提交规范
 
 npx husky-init && npm install
 
+**详情 参考官网，npm，github**
 
 ```js
-// https://github.com/conventional-changelog/commitlint
-// https://github.com/commitizen/cz-cli
+// prettier          https://github.com/prettier/eslint-config-prettier#installation
+// commitlint        https://github.com/conventional-changelog/commitlint
+// commitizen        https://github.com/commitizen/cz-cli
+// typescript-eslint https://typescript-eslint.io/rules/no-non-null-assertion/
+// git-cz            https://github.com/streamich/git-cz
+// iconify           https://github.com/iconify/iconify/tree/main/components/react
+// immer             https://immerjs.github.io/immer/
 
 ```
 
