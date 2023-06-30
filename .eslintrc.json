@@ -55,6 +55,8 @@
     "prettier/prettier": "error", // 对于不符合prettier报eslint错误
     // typeScript (https://typescript-eslint.io/rules)
     "@typescript-eslint/no-explicit-any": 0,
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "off"
   }
 }

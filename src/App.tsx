@@ -4,6 +4,7 @@ import Loading from '@/pages/loading';
 import Router from './router';
 import './App.css';
 import { ConfigProvider } from 'antd';
+import AuthRouter from '@/router/authRouter';
 
 function App() {
   //   const arr = [1, 2, 3, 4];
@@ -20,19 +21,20 @@ function App() {
   //   console.log(1 == '1');
 
   return (
-    <Suspense fallback={<Loading />}>
-      <RouterProvider router={Router}></RouterProvider>
-    </Suspense>
-    // <HashRouter>
-    //   <ConfigProvider
-    //     theme={{
-    //       token: {
-    //         colorPrimary: '#00b96b'
-    //       }
-    //     }}>
-    //     <Router />
-    //   </ConfigProvider>
-    // </HashRouter>
+    // <Suspense fallback={<Loading />}>
+    //   <RouterProvider router={Router}></RouterProvider>
+    // </Suspense>
+    <HashRouter>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: '#00b96b'
+          }
+        }}
+      >
+        <Router />
+      </ConfigProvider>
+    </HashRouter>
   );
 }
 
