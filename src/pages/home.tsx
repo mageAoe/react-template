@@ -1,24 +1,24 @@
-import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import SvgIcons from '@/components/SvgIcons';
-import './style.scss';
-import { Icon, listIcons, getIcon } from '@iconify/react';
-import home from '@iconify-icons/mdi/home';
-import { Button, Space } from 'antd';
+import React, { useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import SvgIcons from '@/components/SvgIcons'
+import './style.scss'
+import { Icon, listIcons, getIcon } from '@iconify/react'
+import home from '@iconify-icons/mdi/home'
+import { Button, Space } from 'antd'
 
 const Index = () => {
   // 路由跳转
-  const router = useNavigate();
+  const router = useNavigate()
 
   function toDetail() {
-    router('/AsyncDetail');
+    router('/AsyncDetail')
   }
 
   function toRecord() {
-    router('/record');
+    router('/record')
   }
 
-  const destinationDom = useRef<HTMLDivElement>(null);
+  const destinationDom = useRef<HTMLDivElement>(null)
 
   // const refList = [] as HTMLDivElement[];
 
@@ -33,42 +33,39 @@ const Index = () => {
   // console.log(data);
   return (
     <>
-      <div>
-        <div ref={destinationDom} className='destination'>
-          123
-        </div>
-
-        <div className='mb-10'>
-          <SvgIcons iconClass='react' size='40' />
-          <Icon
-            icon='mdi-light:home'
-            style={{ color: 'red', fontSize: '32px' }}
-          />
-          <Icon icon='mdi:home' style={{ color: 'red', fontSize: '32px' }} />
-          <Icon icon={home} style={{ color: 'red', fontSize: '32px' }} />
-        </div>
-
-        <div className='mb-10'>
-          <Space wrap>
-            <Button type='primary'>Primary Button</Button>
-            <Button>Default Button</Button>
-            <Button type='dashed'>Dashed Button</Button>
-            <Button type='text'>Text Button</Button>
-            <Button type='link'>Link Button</Button>
-          </Space>
-        </div>
-
-        {/* 注意样式，position: fixed */}
-        <div className='transition-div'></div>
-        <div className='box p-10 ma-auto'>home 页</div>
-        <br />
-        <button onClick={toDetail}>去 detail</button>
-        <br />
-        <br />
-        <button onClick={toRecord}>去 record</button>
+      {/* <div> */}
+      <div ref={destinationDom} className='destination'>
+        123
       </div>
-    </>
-  );
-};
 
-export default Index;
+      <div className='mb-10'>
+        <SvgIcons iconClass='react' size='40' />
+        <Icon icon='mdi-light:home' style={{ color: 'red', fontSize: '32px' }} />
+        <Icon icon='mdi:home' style={{ color: 'red', fontSize: '32px' }} />
+        <Icon icon={home} style={{ color: 'red', fontSize: '32px' }} />
+      </div>
+
+      <div className='mb-10'>
+        <Space wrap>
+          <Button type='primary'>Primary Button</Button>
+          <Button>Default Button</Button>
+          <Button type='dashed'>Dashed Button</Button>
+          <Button type='text'>Text Button</Button>
+          <Button type='link'>Link Button</Button>
+        </Space>
+      </div>
+
+      {/* 注意样式，position: fixed */}
+      <div className='transition-div'></div>
+      <div className='box p-10 ma-auto'>home 页</div>
+      <br />
+      <button onClick={toDetail}>去 detail</button>
+      <br />
+      <br />
+      <button onClick={toRecord}>去 record</button>
+      {/* </div> */}
+    </>
+  )
+}
+
+export default Index

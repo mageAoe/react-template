@@ -1,15 +1,9 @@
-import React, { lazy } from 'react';
-import {
-  Outlet,
-  createHashRouter,
-  Navigate,
-  useRoutes,
-  RouterProvider
-} from 'react-router-dom';
-import HomeC from '../pages/home';
-import Detail from '../pages/detail';
-import Record from '../pages/record';
-import Loading from '@/pages/loading';
+import React, { lazy } from 'react'
+import { Outlet, createHashRouter, Navigate, useRoutes, RouterProvider } from 'react-router-dom'
+import HomeC from '../pages/home'
+import Detail from '../pages/detail'
+import Record from '../pages/record'
+import Loading from '@/pages/loading'
 
 // 引入方法一
 // const Home = lazy(() => import('../pages/home'));
@@ -31,10 +25,10 @@ const AsyncDetail = lazy(
       setTimeout(() => {
         resolve({
           default: Detail
-        });
-      }, 20000);
+        })
+      }, 500)
     })
-);
+)
 
 // const Detail = lazy(() => import('../pages/detail'));
 // const Record = lazy(() => import('../pages/record'));
@@ -45,7 +39,7 @@ function AsyncWrapper() {
     <React.Suspense fallback={<Loading />}>
       <AsyncDetail />
     </React.Suspense>
-  );
+  )
 }
 
 const rootRouter = [
@@ -69,14 +63,14 @@ const rootRouter = [
     path: '/record',
     element: <Record />
   }
-];
+]
 
 const Router = () => {
-  const routes = useRoutes(rootRouter);
-  return routes;
-};
+  const routes = useRoutes(rootRouter)
+  return routes
+}
 
-export default Router;
+export default Router
 
 // export default createHashRouter([
 //   {

@@ -41,7 +41,7 @@
     ], // 箭头函数体周围需要大括号
     "block-scoped-var": "error",
     "eqeqeq": ["error", "always"], // 需要使用===和!==
-    "max-lines": ["error", { "max": 300, "skipBlankLines": true }], // 强制每个文件的最大行数
+    "max-lines": ["error", { "max": 400, "skipBlankLines": true }], // 强制每个文件的最大行数
     "no-console": "error", // 禁止使用console
     "no-empty": "error", // 禁止空块作用域
     "no-empty-function": "error", // 禁止空函数

@@ -1,10 +1,10 @@
-import React, { Suspense } from 'react';
-import { RouterProvider, HashRouter } from 'react-router-dom';
-import Loading from '@/pages/loading';
-import Router from './router';
-import './App.css';
-import { ConfigProvider } from 'antd';
-import AuthRouter from '@/router/authRouter';
+import React, { Suspense } from 'react'
+import { RouterProvider, HashRouter } from 'react-router-dom'
+import Loading from '@/pages/loading'
+import Router from './router'
+import './App.css'
+import { ConfigProvider } from 'antd'
+import AuthRouter from '@/router/authRouter'
 
 function App() {
   //   const arr = [1, 2, 3, 4];
@@ -35,7 +35,7 @@ function App() {
         <Router />
       </ConfigProvider>
     </HashRouter>
-  );
+  )
 }
 
-export default App;
+export default App

@@ -1,18 +1,15 @@
-import { useMemo } from 'react';
-import './icons.css';
+import { useMemo } from 'react'
+import './icons.css'
 
 interface Props {
-  prefix?: string;
-  iconClass: string;
-  size: string;
-  color: string;
+  prefix?: string
+  iconClass: string
+  size: string
+  color: string
 }
 
 function SvgIcons(props: Props) {
-  const symbolId = useMemo(
-    () => `#${props.prefix}-${props.iconClass}`,
-    [props]
-  );
+  const symbolId = useMemo(() => `#${props.prefix}-${props.iconClass}`, [props])
 
   return (
     <>
@@ -24,12 +21,12 @@ function SvgIcons(props: Props) {
         <use xlinkHref={symbolId} fill={props.color} />
       </svg>
     </>
-  );
+  )
 }
 
 SvgIcons.defaultProps = {
   prefix: 'icon',
   size: '1em'
-} as Props;
+} as Props
 
-export default SvgIcons;
+export default SvgIcons
