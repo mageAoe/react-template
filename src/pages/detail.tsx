@@ -15,7 +15,6 @@ const Detail: React.FC = () => {
   const rightTopDom = useRef(null)
   const leftBottomDom = useRef<HTMLDivElement>(null)
   const rightBottomDom = useRef<HTMLDivElement>(null)
-  const containerDom = useRef<HTMLDivElement>(null)
   // 镜像翻转
   let flat = -1
   const scaleChange = (e: any) => {
@@ -24,15 +23,18 @@ const Detail: React.FC = () => {
     flat = -flat
   }
 
+  const count = useRef(0)
+  const sa = useRef(0)
+  const sc = useRef(0)
+  const angle = useRef(0) // 旋转角度
+  const rotateDeg = useRef(0) // 旋转角度
   //配置对象
   const config = {
     idDrag: false,
     isRotate: false,
     isScale: false,
     lastX: 0, // 偏移量x
-    lastY: 0, // 偏移量y
-    angle: 0, // 旋转角度
-    count: 0
+    lastY: 0 // 偏移量y
   }
   // A,B,C分别代表中心点，起始点，结束点坐标
   const pointA = { X: 0, Y: 0 }
@@ -40,7 +42,6 @@ const Detail: React.FC = () => {
   const pointC = { X: 0, Y: 0 }
   let init = { X: 0, Y: 0, count: 0 }
   const mPointB = { X: 0, Y: 0, flag: false } // 移动的B点距离
-  const oldTarget = { target: null, angle: 0 }
 
   const drag = (event: any) => {
     event.preventDefault()
@@ -85,7 +86,7 @@ const Detail: React.FC = () => {
       pointA.X = boxDom.current!.clientWidth / 2 + boxDom.current!.offsetLeft
       pointA.Y = boxDom.current!.clientHeight / 2 + boxDom.current!.offsetTop
 
-      if (config.count > 0) {
+      if (count.current > 0) {
         // 每次移动按下的点不一致,有误差,使用中心点来计算
         mPointB.X = pointA.X - init.X
         mPointB.Y = pointA.Y - init.Y
@@ -99,39 +100,15 @@ const Detail: React.FC = () => {
     // 移除鼠标移动或手势移动监听器
     document?.removeEventListener('mousemove', move)
   }
+
   const rotateDown = (e: any) => {
     e.preventDefault()
     e.stopPropagation()
-    // 计算两个旋转方块之间的角度
-    const tanA = imgBoxDom.current!.clientWidth / imgBoxDom.current!.clientHeight
-
-    const d = Math.round((Math.atan(tanA) * 180) / Math.PI)
-    if (oldTarget.target && oldTarget.target !== e.currentTarget) {
-      if (e.currentTarget === leftBottomDom.current) {
-        oldTarget.angle = 2 * d
-      } else {
-        oldTarget.angle = -2 * d
-      }
-    } else {
-      oldTarget.angle = 0
-    }
-
     config.isRotate = true
-    if (config.count < 1) {
-      // 以鼠标第一次落下的点为起点
-      pointB.X = e.pageX
-      pointB.Y = e.pageY
-      init.count = 0
-      oldTarget.target = e.currentTarget
-      config.count++
-    }
-    if (mPointB.flag) {
-      // 如果移动后,元素的B点也需要加上平移的距离
-      pointB.X += mPointB.X
-      pointB.Y += mPointB.Y
-      mPointB.flag = false
-      init.count = 0
-    }
+    pointB.X = e.pageX
+    pointB.Y = e.pageY
+
+    rotateDeg.current = Number(imgBoxDom.current?.getAttribute('rotate'))
     document?.addEventListener('mousemove', rotate)
   }
 
@@ -159,13 +136,24 @@ const Detail: React.FC = () => {
         (Math.pow(lengthAB, 2) + Math.pow(lengthAC, 2) - Math.pow(lengthBC, 2)) /
         (2 * lengthAB * lengthAC) //   余弦定理求出旋转角
       const angleA = Math.round((Math.acos(cosA) * 180) / Math.PI)
+
       if (direct < 0) {
-        config.angle = -angleA //叉乘结果为负表示逆时针旋转， 逆时针旋转减度数
+        angle.current = -angleA //叉乘结果为负表示逆时针旋转， 逆时针旋转减度数
       } else {
-        config.angle = angleA //叉乘结果为正表示顺时针旋转，顺时针旋转加度数
+        angle.current = angleA //叉乘结果为正表示顺时针旋转，顺时针旋转加度数
       }
-      config.angle += oldTarget.angle
-      imgBoxDom.current!.style.transform = `rotate(${config.angle}deg)`
+
+      if (rotateDeg.current) {
+        angle.current += rotateDeg.current
+      }
+
+      if (sc.current) {
+        imgBoxDom.current!.style.transform = `rotate(${angle.current}deg) scale(${sc.current})`
+      } else {
+        imgBoxDom.current!.style.transform = `rotate(${angle.current}deg)`
+      }
+      // imgBoxDom.current!.style.transform = `rotate(${angle.current}deg)`
+      imgBoxDom.current?.setAttribute('rotate', angle.current + '')
     }
   }
 
@@ -180,52 +168,44 @@ const Detail: React.FC = () => {
     e.preventDefault()
     e.stopPropagation()
     config.isScale = true
-    if (config.count < 1) {
-      // 以鼠标第一次落下的点为起点
-      pointB.X = e.pageX
-      pointB.Y = e.pageY
-      init.count = 0
-      oldTarget.target = e.currentTarget
-      config.count++
-    }
-    if (mPointB.flag) {
-      // 如果移动后,元素的B点也需要加上平移的距离
-      pointB.X += mPointB.X
-      pointB.Y += mPointB.Y
-      mPointB.flag = false
-      init.count = 0
+    pointB.X = e.pageX
+    pointB.Y = e.pageY
+    // 以鼠标第一次落下的点为起点
+
+    if (count.current < 1) {
+      const scalX1 = pointB.X - pointA.X
+      const scalY1 = pointB.Y - pointA.Y
+      sa.current = Math.sqrt(scalX1 * scalX1 + scalY1 * scalY1)
+      count.current++
     }
     document?.addEventListener('mousemove', scale)
   }
 
-  function calculateDistance(x1: number, y1: number, x2: number, y2: number) {
-    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
-  }
-
   const scale = (e: any) => {
     e.preventDefault()
+    e.stopPropagation()
+
     if (config.isScale) {
       // 获取结束点坐标
       pointC.X = e.pageX
       pointC.Y = e.pageY
       // 计算每次移动元素的半径变化,用作拉伸
-      // const scalX1 = pointB.X - pointA.X
-      // const scalY1 = pointB.Y - pointA.Y
-      // const scalX = pointC.X - pointA.X
-      // const scalY = pointC.Y - pointA.Y
+      const scalX = pointC.X - pointA.X
+      const scalY = pointC.Y - pointA.Y
       // 计算出拉伸比例
-      // const sa = Math.sqrt(scalX1 * scalX1 + scalY1 * scalY1)
-      // const ss = Math.sqrt(scalX * scalX + scalY * scalY)
-
-      const sa = calculateDistance(pointA.X, pointA.Y, pointB.X, pointB.Y)
-      const ss = calculateDistance(pointA.X, pointA.Y, pointC.X, pointC.Y)
-
-      const sc = ss / sa
-      imgBoxDom.current!.style.transform = `scale(${sc})`
+      const ss = Math.sqrt(scalX * scalX + scalY * scalY)
+      sc.current = ss / sa.current
+      if (angle.current) {
+        imgBoxDom.current!.style.transform = `rotate(${angle.current}deg) scale(${sc.current})`
+      } else {
+        imgBoxDom.current!.style.transform = `scale(${sc.current})`
+      }
     }
   }
 
-  const cloaseScale = () => {
+  const cloaseScale = (e: any) => {
+    e.preventDefault()
+    e.stopPropagation()
     config.isScale = false
     // 移除鼠标移动或手势移动监听器
     document?.removeEventListener('mousemove', scale)
@@ -233,8 +213,8 @@ const Detail: React.FC = () => {
 
   useEffect(() => {
     // 元素中心点 元素1/2自身宽高 + 元素的定位
-    pointA.X = imgBoxDom.current!.clientWidth / 2 + imgBoxDom.current!.offsetLeft
-    pointA.Y = imgBoxDom.current!.clientHeight / 2 + imgBoxDom.current!.offsetTop
+    pointA.X = boxDom.current!.clientWidth / 2 + boxDom.current!.offsetLeft
+    pointA.Y = boxDom.current!.clientHeight / 2 + boxDom.current!.offsetTop
     // 聚焦
     imgDom.current?.addEventListener('click', eleFouc)
 
