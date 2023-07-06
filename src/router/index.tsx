@@ -3,6 +3,7 @@ import { Outlet, createHashRouter, Navigate, useRoutes, RouterProvider } from 'r
 import HomeC from '../pages/home'
 import Detail from '../pages/detail'
 import Record from '../pages/record'
+import Test from '@/pages/test'
 import Loading from '@/pages/loading'
 
 // 引入方法一
@@ -62,6 +63,10 @@ const rootRouter = [
   {
     path: '/record',
     element: <Record />
+  },
+  {
+    path: '/test',
+    element: <Test />
   }
 ]
 

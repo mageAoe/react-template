@@ -1,0 +1,22 @@
+.treeUl {
+  // margin-left: 10px;
+  list-style: none;
+}
+input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+}
+ul li {
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+ul li label:hover {
+  color: teal;
+  transition: all 1s;
+}
+ul li input[type='checkbox']:checked + label {
+  color: #007acc;
+
+  // background-color: #007acc;
+}
