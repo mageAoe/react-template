@@ -50,6 +50,9 @@ npx husky-init && npm install
 
 ```
 
+stylelint
+
+npx stylelint "src/*.css"
 
 ```js
 	indentation: null, // 指定缩进空格
@@ -75,4 +78,14 @@ npx husky-init && npm install
 		}
 	]
 
+```
+
+```
+    "extends": [
+        "stylelint-config-standard",
+        "stylelint-config-standard-scss",
+				"stylelint-config-prettier-scss",
+        "stylelint-config-prettier",
+				"stylelint-config-recess-order"
+    ],
 ```
