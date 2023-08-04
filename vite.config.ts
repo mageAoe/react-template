@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
-import Icons from 'unplugin-icons/vite';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
+import Icons from 'unplugin-icons/vite'
 // import IconsResolver from "unplugin-icons/resolve"
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
-import UnoCSS from 'unocss/vite';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import UnoCSS from 'unocss/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig(config => {
@@ -53,6 +53,11 @@ export default defineConfig(config => {
           drop_debugger: config.mode === 'prod'
         }
       }
+    },
+    server: {
+      host: true,
+      open: true,
+      hmr: true
     }
-  };
-});
+  }
+})
