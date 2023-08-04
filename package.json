@@ -1,7 +1,7 @@
 {
   "name": "react18-vite-ts",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev:test": "vite --mode test",
@@ -15,7 +15,10 @@
     "lint:lint-staged": "lint-staged",
     "preview": "vite preview",
     "prepare": "husky install",
-    "changelog": "conventional-changelog -p cz-config.js -i CHANGELOG.md -s -r 0"
+    "changelog": "conventional-changelog -p cz-config.js -i CHANGELOG.md -s -r 0",
+    "stylelint": "stylelint src/**/*.{css,scss} --fix --custom-syntax postcss-scss",
+    "lint:stylelint": "stylelint --cache --fix \"**/*.{less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
+    "release": "standard-version"
   },
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
@@ -52,13 +55,17 @@
     "git-cz": "^4.9.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.3",
+    "postcss-scss": "^4.0.6",
     "prettier": "2.8.8",
     "sass": "^1.63.6",
+    "standard-version": "^9.5.0",
     "stylelint": "^15.9.0",
     "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-prettier-scss": "^1.0.0",
     "stylelint-config-recess-order": "^4.2.0",
     "stylelint-config-standard": "^33.0.0",
     "stylelint-config-standard-scss": "^10.0.0",
+    "stylelint-scss": "^5.0.1",
     "terser": "^5.18.1",
     "typescript": "^5.0.2",
     "unocss": "^0.53.4",
@@ -77,7 +84,7 @@
     "package.json": [
       "prettier --write"
     ],
-    "*.{scss,less,styl}": [
+    "*.{scss,less,css}": [
       "stylelint --fix",
       "prettier --write"
     ]
