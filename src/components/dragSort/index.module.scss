@@ -1,0 +1,29 @@
+/** index.module.scss */
+
+.wrapper {
+  padding: 10px 0;
+  margin: 100px auto;
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 5px;
+}
+
+.list {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+  list-style: none;
+}
+
+.item {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.draggingItem {
+  opacity: 0.7;
+  transform: scale(1.06);
+}

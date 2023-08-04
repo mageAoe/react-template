@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, createContext, useMemo } from 'react'
 import { RouterProvider, HashRouter } from 'react-router-dom'
 import Loading from '@/pages/loading'
 import Router from './router'
